@@ -1,5 +1,20 @@
-# 1. Primeiramente iremos utilizar as brechas do Python para criar uma seleção "pseudo-aleatória" usando o random
-from random import randint
+"""
+
+    ~ JOGO DA FORCA ~
+    Author.: @rodrigoviannini
+
+    OBS.: Meu primeiro projeto em Python, além de ser a primeira versão, visto que tenho exatos 1 Mês e 19 dias como programador! Estou feliz com o resultado, mas nunca satisfeito!
+
+    Alterações para versão 2.
+
+    1. Substituir funções globais por parametrizadas
+    2. Substituir o hífen inputado pelo usuário por espaços em branco em palavras compostas
+    3. Realizar melhorias
+
+"""
+
+# Primeiramente iremos utilizar as brechas do Python para criar uma seleção "pseudo-aleatória" usando o random
+import random 
 
 
 # Criação de lista do esboço da figura do enforcado
@@ -58,13 +73,22 @@ figuraForca = [
     |   O
     |  \|/   
     |   |
-    |  / \
-    ======="""    
-]
+    |  / \\
+    ======="""
+    ]
 
-# 2. Criação do banco de palavras e apresentação
-palavras = [ "Japao", "Alemanha", "Franca", "Espanha", "Romenia", "Argentina", "Brasil", "Nova Zelandia",
-            "Africa do Sul", "Costa do Marfim", "Egito", "Australia", "Arabia Saudita", "Coreia do Sul", 
+
+"""print(figuraForca[0])
+print(figuraForca[1])
+print(figuraForca[2])
+print(figuraForca[3])
+print(figuraForca[4])
+print(figuraForca[5])
+print(figuraForca[6])"""
+
+# Criação do banco de palavras e apresentação
+palavras = [ "Japao", "Alemanha", "Franca", "Espanha", "Romenia", "Argentina", "Brasil", "Nova-Zelandia",
+            "Africa-do-Sul", "Costa-do-Marfim", "Egito", "Australia", "Arabia-Saudita", "Coreia-do-Sul", 
             "Honduras", "Mexico" ]
 
 # print(random.choice(palavras))
@@ -80,10 +104,12 @@ print()
 print("-" * 80)
 print()
 print(" " * 12, "Dica: Países participantes das Olimpíadas Tokyo 2021\n")
+print(" " * 12, "OBS.: Países com nome composto acrescente hífen '-' ")
+print()
 print("-" * 80)
 print()
 
-# 3. Criação da função principal
+# Criação da função principal
 def principal():
     """ Função principal
     Declarei as variaveis vazias e as condições de jogo, sendo:
@@ -91,8 +117,9 @@ def principal():
     CHUTE -> As tentativas "chutes!
     VITORIAJOGO -> A mensagem de vitória!"""
     
+
     letrasErradas = " " # Iniciamos esta variável
-    letrasCertas = " " # Iniciamos esta variável
+    letrasCertas = "" # Iniciamos esta variável
     palavraSorteada = palavraSorteadaEscolhida().upper() # Inicia a palavra sorteada
    
     partida = True
@@ -115,19 +142,19 @@ def principal():
                 partidaJogo(letrasErradas, letrasCertas, palavraSorteada) # Imprime ERROS, ACERTOS e PAÍS SORTEADO
  
                 print("===== Loser ===== | Você atingiu o limite de tentativas!")
-                print("Depois de "+ str(len(letrasErradas)) + " letras erradas e " + str(len(letrasCertas)) + " letras certas! ", end =" ")
-                print("O país sorteado foi:  " + palavraSorteada)
+                print("Depois de " + str(len(letrasErradas)) + " letras erradas e " + str(len(letrasCertas)) + " letras certas! ", end =" ")
+                print("O país sorteado foi:  ",  palavraSorteada)
  
                 partida = False
  
         if not partida: # Se o usuário estiver jogando (False)
             if jogarNovamente(): 
                 letrasErradas = " "  # Reinicia esta variável
-                letrasCertas = " " # Reinicia esta variável
+                letrasCertas = "" # Reinicia esta variável
                 partida = True
                 palavraSorteada = palavraSorteadaEscolhida().upper() # Reinicia a palavra sorteada
                 
-# 4. Criação das funções de jogo
+# Criação das funções de jogo
 def palavraSorteadaEscolhida():
     
     """
@@ -149,7 +176,8 @@ def partidaJogo(letrasErradas, letrasCertas, palavraSorteada):
 
     """
     Função do jogo propriamente dito, possui as figuras, letras certas, letras erradas e o país sorteado"""
-    
+
+   
     print(figuraForca[len(letrasErradas)] + "\n")  # Imprime a qtde de letras erradas
  
     print("Letras Erradas: ", end = " ") # Letras erradas que receberão um espaço
@@ -159,6 +187,7 @@ def partidaJogo(letrasErradas, letrasCertas, palavraSorteada):
     for i in range(len(palavraSorteada)): # Para cada letra certa, iremos varrer a palavra
         if palavraSorteada[i] in letrasCertas: # Se a palavra sorteada esta em letras
             espaco = espaco[:i] + palavraSorteada[i] + espaco[i+1:] # espaço recece = [espaço e todos que os antecedem] + [palavra sorteada] + [espaço atual + 1 + seus sucessores]
+    espacosJogo(espaco) # A função espacoJogo imprime os espaços!
 
 def chutesJogo(chutesON):
 
@@ -172,7 +201,7 @@ def chutesJogo(chutesON):
             print("Digite apenas uma letra!!!")
         elif chute in chutesON: # Caso os chutes sejam repetidos
             print('Letra repetida, tente novamente!!!')
-        elif not "A" <= chute <= "Z": # garante que o chute esteja dentro do alfabeto
+        elif not "A" <= chute <= "Z" and chute == " ": # garante que o chute esteja dentro do alfabeto
             print("Cuidado!!! Você digitou um caracter inválido!!!")
         else:
             return chute  # Imprime o chute!!!!
@@ -184,19 +213,28 @@ def jogarNovamente():
     Funcao que garante a opção de jogar ou não uma nova partida!"""
     
     return input("Voce quer jogar novamente? (S/N)\n").upper().startswith('S') # se a resposta do usuario convertido em maiusculo for verdadeiro
- 
+
+    """ Usar-> função startswith() é usada para verificar se uma determinada frase começa com alguma string particular.
+        Os parâmetros de início e término são opcionais.
+        
+        Podemos usá-los quando quisermos que apenas alguma substring particular da string original seja considerada para pesquisa.
+        
+        Retorna -> o valor de retorno é binário. A função retorna True se a frase original começar com search_string, senão False .
+        
+        """
+
 def vitoriaJogo(palavraSorteada, letrasCertas):
     
     '''
     Funcao que verifica se o usuario acertou todas as
     letras da palavra sorteada'''
     
-    vitoria = True
+    vitoria = True #nao precisaria
     for letra in palavraSorteada: # Percorre cada uma das letras da palavra sorteada
         if letra not in letrasCertas: # Se a letra não está dentros de letras certas
             vitoria = False # Se ela não estiver dentro das letras certas, retorna False
             break 
- 
-    return vitoria 
+            # return False
+    return vitoria #True
     
 principal()
