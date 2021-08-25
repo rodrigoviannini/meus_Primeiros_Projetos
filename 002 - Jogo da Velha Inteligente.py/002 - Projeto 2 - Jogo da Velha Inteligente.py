@@ -1,9 +1,26 @@
+# 1. O projeto 
+
 """
-Neste projeto vocês deverão utilizar o arquivo base fornecido nesse repositório, que se trata de um jogo da velha para jogador vs. máquina, e preencher a função da jogada da máquina!
+    Neste* projeto vocês deverão utilizar o arquivo base fornecido nesse repositório, 
+    que se trata de um jogo da velha para jogador vs. máquina, e preencher a função da jogada da máquina!
+"""
 
-Para fins de simplicidade considerem sempre que a máquina será a primeira a jogar e sua primeira jogada sempre será no canto superior esquerdo do tabuleiro, em seguida mapeem os casos posíveis seguintes e utilizando if's (MUUUITOS if's) desenvolvam um algoritmo capaz de nunca perder (no pior dos casos empatar!). (Dica: qualquer quadrado que o usuario jogar com excessão do central resulta em vitória garantida da máquina, teste as possibilidades de resposta da máquina que garantam isso)
+# Atenção a simplicidade
 
-Sintam-se livres para alterar o código fornecido como bem entenderem, não se limitem a mexer apenas na função a ser preenchida, a base é apenas para nortear vocês!
+"""
+    2. Para fins de simplicidade considerem sempre que a máquina será a primeira a jogar e sua primeira jogada 
+    sempre será no canto superior esquerdo do tabuleiro, em seguida mapeem os casos posíveis seguintes e 
+    utilizando if's (MUUUITOS if's) desenvolvam um algoritmo capaz de nunca perder (no pior dos casos empatar!). 
+    
+    (Dica: qualquer quadrado que o usuario jogar com excessão do central resulta em vitória garantida da máquina, teste as possibilidades de resposta da máquina que garantam isso)
+"""
+
+# Liberdade criativa
+
+"""
+    3. Sintam-se livres para alterar o código fornecido como bem entenderem, não se limitem a mexer apenas na função a ser preenchida, 
+    a base é apenas para nortear vocês!
+
 """
 
 from tabulate import tabulate
@@ -138,7 +155,117 @@ def jogadaMaquina(tabuleiro, jogada):
     """
     if jogada == 1:
         tabuleiro["A"][0] = "X"
+    elif jogada == 2:
+       jogadaDois(tabuleiro, jogada)
+    elif jogada == 3:
+        jogadaTres(tabuleiro, jogada)
+    elif jogada == 4:
+        jogadaQuatro(tabuleiro, jogada)
+    elif jogada == 5:
+        jogadaCinco(tabuleiro, jogada)
+
+    return tabuleiro
     
+def jogadaDois(tabuleiro, jogada):
+    if jogada == 2 and tabuleiro["A"][1] == "O":
+        tabuleiro["B"][1] = "X"  # VERIFICADO
+    elif jogada == 2 and tabuleiro["A"][2] == "O":
+        tabuleiro["C"][0] = "X"  # VERIFICADO
+    elif jogada == 2 and tabuleiro["B"][0] == "O":
+        tabuleiro["B"][1] = "X"  # VERIFICADO
+    elif jogada == 2 and tabuleiro["B"][1] == "O":
+        tabuleiro["A"][2] = "X"  # VERIFICADO
+    elif jogada == 2 and tabuleiro["B"][2] == "O":
+        tabuleiro["C"][0] = "X"  # VERIFICADO
+    elif jogada == 2 and tabuleiro["C"][0] == "O":
+        tabuleiro["A"][2] = "X"  # VERIFICADO
+    elif jogada == 2 and tabuleiro["C"][1] == "O":
+        tabuleiro["A"][2] = "X"  # VERIFICADO
+    elif jogada == 2 and tabuleiro["C"][2] == "O":
+        tabuleiro["B"][1] = "X"  # VERIFICADO
+
+    return tabuleiro
+
+
+def jogadaTres(tabuleiro, jogada):
+    if jogada == 3 and tabuleiro["C"][2] == "O" and tabuleiro["A"][1] == "O": 
+       tabuleiro["B"][0] = "X"  # VERIFICADO
+    elif jogada == 3 and tabuleiro["B"][0] == "O" and tabuleiro["A"][2] == "O": 
+       tabuleiro["B"][1] = "X"  # VERIFICADO
+    elif jogada == 3 and tabuleiro["C"][2] == "O" and tabuleiro["B"][0] == "O": 
+       tabuleiro["A"][1] = "X"  # VERIFICADO
+    elif jogada == 3 and tabuleiro["A"][1] == "O" and tabuleiro["B"][1] == "O": 
+       tabuleiro["C"][1] = "X"  # VERIFICADO
+    elif jogada == 3 and tabuleiro["B"][0] == "O" and tabuleiro["B"][2] == "O": 
+       tabuleiro["B"][1] = "X"  # VERIFICADO
+    elif jogada == 3 and tabuleiro["A"][1] == "O" and tabuleiro["C"][0] == "O": 
+        tabuleiro["C"][2] = "X"  # VERIFICADO
+    elif jogada == 3 and tabuleiro["A"][1] == "O" and tabuleiro["C"][1] == "O": 
+        tabuleiro["B"][1] = "X"  # VERIFICADO
+    elif jogada == 3 and tabuleiro["C"][0] == "O" and tabuleiro["C"][2] == "O":
+       tabuleiro["C"][1] = "X"  # VERIFICADO
+    elif jogada == 3 and tabuleiro["B"][2] == "O" and tabuleiro["C"][2] == "O":
+        tabuleiro["A"][2] = "X"  # VERIFICADO
+    elif jogada == 3 and tabuleiro["A"][2] == "O" and tabuleiro["C"][2] == "O":
+        tabuleiro["B"][2] = "X"  # VERIFICADO
+
+    return tabuleiro
+
+
+def jogadaQuatro(tabuleiro, jogada):
+    if jogada == 4 and tabuleiro["C"][0] == "O" and tabuleiro["C"][2] == "O" and tabuleiro["A"][1] == "O":
+        tabuleiro["B"][2] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["B"][2] == "O" and tabuleiro["C"][2] == "O" and tabuleiro["A"][1] == "O":
+        tabuleiro["C"][0] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["C"][2] == "O" and tabuleiro["B"][0] == "O" and tabuleiro["A"][2] == "O":
+        tabuleiro["C"][1] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["C"][0] == "O" and tabuleiro["C"][2] == "O" and tabuleiro["B"][0] == "O":
+        tabuleiro["A"][2] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["C"][1] == "O" and tabuleiro["C"][2] == "O" and tabuleiro["B"][0] == "O":
+        tabuleiro["A"][2] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["A"][2] == "O" and tabuleiro["C"][2] == "O" and tabuleiro["B"][0] == "O":
+        tabuleiro["C"][1] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["B"][0] == "O" and tabuleiro["B"][1] == "O" and tabuleiro["A"][1] == "O":
+        tabuleiro["B"][2] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["B"][2] == "O" and tabuleiro["B"][1] == "O" and tabuleiro["A"][1] == "O":
+        tabuleiro["B"][0] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["C"][2] == "O" and tabuleiro["B"][2] == "O" and tabuleiro["B"][0] == "O":
+        tabuleiro["A"][2] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["A"][2] == "O" and tabuleiro["B"][2] == "O" and tabuleiro["B"][0] == "O":
+        tabuleiro["C"][2] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["B"][2] == "O" and tabuleiro["A"][1] == "O" and tabuleiro["C"][0] == "O":
+       tabuleiro["B"][1] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["B"][1] == "O" and tabuleiro["A"][1] == "O" and tabuleiro["C"][0] == "O":
+       tabuleiro["B"][2] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["C"][0] == "O" and tabuleiro["A"][1] == "O" and tabuleiro["C"][1] == "O":
+       tabuleiro["C"][2] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["C"][2] == "O" and tabuleiro["A"][1] == "O" and tabuleiro["C"][1] == "O":
+       tabuleiro["C"][0] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["A"][1] == "O" and tabuleiro["C"][0] == "O" and tabuleiro["C"][2] == "O":
+        tabuleiro["C"][0] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["A"][1] == "O" and tabuleiro["B"][2] == "X" and tabuleiro["C"][2] == "O":
+        tabuleiro["C"][0] = "X"  # VERIFICADO
+    elif jogada == 4 and tabuleiro["C"][0] == "O" and tabuleiro["B"][2] == "O" and tabuleiro["C"][2] == "O":
+        tabuleiro["A"][1] = "X"  # VERIFICADO
+
+    return tabuleiro
+
+
+def jogadaCinco(tabuleiro, jogada):
+    if jogada == 5 and tabuleiro["A"][1] == "O" and tabuleiro["C"][2] == "O" and tabuleiro["B"][0] == "O" and tabuleiro["A"][2] == "O":
+       tabuleiro["B"][2] = "X"  # VERIFICADO
+    elif jogada == 5 and tabuleiro["C"][2] == "O" and tabuleiro["B"][1] == "O" and tabuleiro["A"][1] == "O" and tabuleiro["B"][0] == "O":
+        tabuleiro["C"][0] = "X"  # VERIFICADO
+    elif jogada == 5 and tabuleiro["C"][0] == "O" and tabuleiro["B"][1] == "O" and tabuleiro["A"][1] == "O" and tabuleiro["A"][2] == "X":
+        tabuleiro["C"][2] = "X"  # VERIFICADO
+    elif jogada == 5 and tabuleiro["B"][2] == "O" and tabuleiro["B"][2] == "O" and tabuleiro["A"][1] == "O" and tabuleiro["C"][0] == "O":
+       tabuleiro["A"][2] = "X"  # VERIFICADO
+    elif jogada == 5 and tabuleiro["B"][0] == "O" and tabuleiro["A"][1] == "O" and tabuleiro["C"][2] == "O" and tabuleiro["C"][0] == "O":
+       tabuleiro["A"][2] = "X"  # VERIFICADO
+    elif jogada == 5 and tabuleiro["C"][1] == "O" and tabuleiro["A"][1] == "X" and tabuleiro["C"][2] == "O" and tabuleiro["A"][2] == "O":
+        tabuleiro["C"][0] = "X"  # VERIFICADO
+    elif jogada == 5 and tabuleiro["A"][1] == "O" and tabuleiro["B"][1] == "X" and tabuleiro["C"][2] == "O" and tabuleiro["A"][2] == "O":
+       tabuleiro["C"][0] = "X" # VERIFICADO
 
     return tabuleiro
 
@@ -156,13 +283,15 @@ jogador = "X"
 # Inteiro para contar em qual rodada estamos
 rodada = 0
 
+
 print("Instruções:\nDigite as coordenadas da sua jogada no formato letra e numero (Exs: 'A 1', 'B 2', 'C 3', etc)\n")
 # Loop enquanto jogo não acabar que cicla em jogada da maquina e jogada do usuario com as devidas validações de entrada e fim de jogo
 while not acabou:
     rodada += 1
     tabuleiro = jogadaMaquina(tabuleiro, rodada)
     acabou = confereFim(tabuleiro, "X")
+    if acabou:
+        break
     imprimiTabuleiro(tabuleiro)
     tabuleiro = jogada(tabuleiro)
     acabou = confereFim(tabuleiro, "O")
-© 2021 GitHub, Inc.
